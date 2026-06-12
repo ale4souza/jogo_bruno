@@ -1,0 +1,259 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+
+#wrap { max-width: 480px; margin: 0 auto; padding: 1rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+
+.tela { width: 100%; border-radius: 16px; padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; text-align: center; }
+
+#tela-intro { background: #FBEAF0; border: 0.5px solid #F4C0D1; }
+#fase1-card  { background: #EEEDFE; border: 0.5px solid #CECBF6; display: none; }
+#fase2-card  { background: #E1F5EE; border: 0.5px solid #9FE1CB; display: none; }
+#tela-final  { background: #FBEAF0; border: 0.5px solid #F4C0D1; display: none; }
+
+.tag { font-size: 11px; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
+.tag-pink   { color: #993556; }
+.tag-purple { color: #534AB7; }
+.tag-teal   { color: #0F6E56; }
+
+.titulo { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+.subtitulo { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; max-width: 300px; white-space: pre-line; }
+
+/* dots */
+#dots { display: flex; gap: 7px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #F4C0D1; transition: background 0.4s; }
+.dot.on { background: #D4537E; }
+
+/* botao primario */
+.btn-pink { background: #D4537E; border: none; border-radius: 10px; padding: 11px 28px; font-size: 14px; color: #fff; cursor: pointer; font-family: var(--font-sans); }
+.btn-pink:hover { background: #993556; }
+.btn-outline { background: transparent; border: 1.5px solid #D4537E; border-radius: 10px; padding: 10px 28px; font-size: 14px; color: #D4537E; cursor: pointer; font-family: var(--font-sans); }
+.btn-outline:hover { background: #FBEAF0; }
+
+/* fase 1 */
+.frase { font-size: 20px; font-weight: 500; color: #3C3489; }
+#f1-opts { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 300px; }
+.f1b { background: #fff; border: 1px solid #CECBF6; border-radius: 10px; padding: 11px 16px; font-size: 14px; color: #3C3489; cursor: pointer; font-family: var(--font-sans); transition: all 0.15s; }
+.f1b:hover:not([data-off]) { background: #EEEDFE; }
+.f1b.wrong { background: #FCEBEB; border-color: #F09595; color: #791F1F; cursor: default; }
+.f1b.right { background: #E1F5EE; border-color: #5DCAA5; color: #085041; cursor: default; }
+#f1-fb { font-size: 13px; color: #534AB7; min-height: 18px; }
+
+/* fase 2 */
+#f2-question { font-size: 16px; font-weight: 500; color: #085041; max-width: 280px; line-height: 1.6; }
+#f2-hint { font-size: 12px; color: #0F6E56; font-style: italic; }
+#f2-row { display: flex; gap: 8px; width: 100%; max-width: 300px; }
+#f2-input { flex: 1; border: 1px solid #9FE1CB; border-radius: 10px; padding: 10px 14px; font-size: 14px; font-family: var(--font-sans); color: #085041; background: #fff; outline: none; }
+#f2-input:focus { border-color: #1D9E75; }
+#f2-btn { background: #1D9E75; border: none; border-radius: 10px; padding: 10px 16px; font-size: 14px; color: #fff; cursor: pointer; font-family: var(--font-sans); }
+#f2-btn:hover { background: #0F6E56; }
+#f2-fb { font-size: 13px; min-height: 18px; color: #0F6E56; }
+#f2-fb.err { color: #791F1F; }
+
+/* final */
+#final-header { width: 100%; background: #fff; border: 0.5px solid #F4C0D1; border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+#final-nome { font-size: 22px; font-weight: 500; color: #72243E; }
+#final-sub { font-size: 13px; color: #993556; max-width: 280px; line-height: 1.6; }
+
+#svg-wrap { position: relative; width: 180px; height: 210px; }
+.fnote { position: absolute; font-size: 18px; animation: fn 2.4s ease-in forwards; opacity: 0; pointer-events: none; }
+@keyframes fn { 0%{opacity:0;transform:translateY(0) scale(.7)} 15%{opacity:1;transform:translateY(-14px) scale(1)} 75%{opacity:.8;transform:translateY(-80px)} 100%{opacity:0;transform:translateY(-110px) scale(.8)} }
+
+#final-txt { font-size: 14px; color: #72243E; max-width: 270px; line-height: 1.7; }
+
+#spotify-btn { display: flex; align-items: center; gap: 10px; background: #1DB954; border: none; border-radius: 10px; padding: 12px 22px; font-size: 14px; color: #fff; cursor: pointer; text-decoration: none; font-family: var(--font-sans); }
+#spotify-btn:hover { background: #17a349; }
+</style>
+
+<div id="wrap">
+  <div id="dots" style="display:none">
+    <div class="dot" id="d0"></div>
+    <div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div>
+  </div>
+
+  <!-- INTRO -->
+  <div id="tela-intro" class="tela">
+    <div style="font-size:44px">🌙</div>
+    <div class="tag tag-pink">um joguinho pra você</div>
+    <div class="titulo">ei, Bruno</div>
+    <div class="subtitulo">tem uma surpresa em 3 fases esperando por você. bora começar?</div>
+    <button class="btn-pink" onclick="irFase1()">vamos lá ✨</button>
+  </div>
+
+  <!-- FASE 1 -->
+  <div id="fase1-card" class="tela">
+    <div class="tag tag-purple">fase 1</div>
+    <div class="frase">sou fã do(a)...</div>
+    <div id="f1-opts">
+      <button class="f1b" onclick="resp(this,false)">dos seus olhos</button>
+      <button class="f1b" onclick="resp(this,false)">da sua boca</button>
+      <button class="f1b" onclick="resp(this,false)">do sorriso estampado</button>
+      <button class="f1b" onclick="resp(this,true)">de você</button>
+    </div>
+    <div id="f1-fb"></div>
+    <button id="f1-next" class="btn-outline" style="display:none" onclick="irFase2()">próxima fase →</button>
+  </div>
+
+  <!-- FASE 2 -->
+  <div id="fase2-card" class="tela">
+    <div class="tag tag-teal">fase 2 — pergunta secreta</div>
+    <div id="f2-question">o que é a coisa mais aguardada do ano?</div>
+    <div id="f2-hint">dica: não é filme, não é viagem...</div>
+    <div id="f2-row">
+      <input id="f2-input" type="text" placeholder="sua resposta..." onkeydown="if(event.key==='Enter')checar()"/>
+      <button id="f2-btn" onclick="checar()">→</button>
+    </div>
+    <div id="f2-fb"></div>
+    <button id="f2-next" class="btn-outline" style="display:none;border-color:#1D9E75;color:#1D9E75" onclick="irFinal()">ver a surpresa 💌</button>
+  </div>
+
+  <!-- FINAL -->
+  <div id="tela-final" class="tela">
+    <div id="final-header">
+      <div class="tag tag-pink">meu cantor preferido</div>
+      <div id="final-nome">Bruno 🎸</div>
+      <div id="final-sub">sua voz tem um jeito especial de deixar qualquer momento mais bonito.</div>
+    </div>
+    <div id="svg-wrap">
+      <svg width="180" height="210" viewBox="0 0 180 210" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="90" cy="188" rx="30" ry="8" fill="#F4C0D1" opacity="0.5"/>
+        <rect x="76" y="143" width="13" height="36" rx="6" fill="#7F77DD"/>
+        <rect x="91" y="143" width="13" height="36" rx="6" fill="#7F77DD"/>
+        <ellipse cx="82" cy="179" rx="9" ry="5" fill="#534AB7"/>
+        <ellipse cx="97" cy="179" rx="9" ry="5" fill="#534AB7"/>
+        <rect x="69" y="91" width="42" height="56" rx="10" fill="#AFA9EC"/>
+        <ellipse cx="90" cy="74" rx="22" ry="24" fill="#f5c9a0"/>
+        <ellipse cx="90" cy="54" rx="20" ry="11" fill="#4a2c0a"/>
+        <ellipse cx="73" cy="63" rx="7" ry="13" fill="#4a2c0a"/>
+        <ellipse cx="107" cy="63" rx="7" ry="13" fill="#4a2c0a"/>
+        <ellipse cx="82" cy="74" rx="3.5" ry="4" fill="white"/>
+        <ellipse cx="98" cy="74" rx="3.5" ry="4" fill="white"/>
+        <ellipse cx="83" cy="75" rx="2.2" ry="2.8" fill="#2c1a0e"/>
+        <ellipse cx="99" cy="75" rx="2.2" ry="2.8" fill="#2c1a0e"/>
+        <ellipse cx="84" cy="73.5" rx="0.9" ry="0.9" fill="white"/>
+        <ellipse cx="100" cy="73.5" rx="0.9" ry="0.9" fill="white"/>
+        <path d="M82 85 Q90 92 98 85" stroke="#a0522d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <rect id="arm-l" x="48" y="99" width="24" height="10" rx="5" fill="#f5c9a0"/>
+        <rect id="arm-r" x="108" y="99" width="24" height="10" rx="5" fill="#f5c9a0"/>
+        <ellipse cx="50" cy="108" rx="6" ry="6" fill="#f5c9a0"/>
+        <ellipse cx="130" cy="108" rx="6" ry="6" fill="#f5c9a0"/>
+        <ellipse cx="42" cy="133" rx="18" ry="22" fill="#c0834a"/>
+        <ellipse cx="42" cy="114" rx="13" ry="15" fill="#c0834a"/>
+        <ellipse cx="42" cy="133" rx="9" ry="11" fill="#a0622a" opacity="0.5"/>
+        <ellipse cx="42" cy="131" rx="6" ry="6" fill="#7a4820"/>
+        <rect x="37" y="91" width="11" height="28" rx="4" fill="#8B5E2A"/>
+        <line x1="38" y1="98" x2="47" y2="98" stroke="#f5d0a0" stroke-width="1"/>
+        <line x1="38" y1="105" x2="47" y2="105" stroke="#f5d0a0" stroke-width="1"/>
+        <line x1="38" y1="111" x2="47" y2="111" stroke="#f5d0a0" stroke-width="1"/>
+        <line x1="39.5" y1="91" x2="39.5" y2="148" stroke="#d4b483" stroke-width="0.7" opacity="0.8"/>
+        <line x1="41.5" y1="91" x2="41.5" y2="148" stroke="#d4b483" stroke-width="0.7" opacity="0.8"/>
+        <line x1="43.5" y1="91" x2="43.5" y2="148" stroke="#d4b483" stroke-width="0.7" opacity="0.8"/>
+        <line x1="45.5" y1="91" x2="45.5" y2="148" stroke="#d4b483" stroke-width="0.7" opacity="0.8"/>
+        <ellipse cx="38" cy="91" rx="2.5" ry="2.5" fill="#b8860b"/>
+        <ellipse cx="48" cy="91" rx="2.5" ry="2.5" fill="#b8860b"/>
+      </svg>
+    </div>
+    <div id="final-txt">e tem uma música que eu quero que você ouça pensando em nós dois. 🎶</div>
+    <a id="spotify-btn" href="https://open.spotify.com/track/2gYo5RNzC9ygAh4yeizypt" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      ouvir no Spotify
+    </a>
+  </div>
+</div>
+
+<script>
+const ACEITAS = ['nosso encontro','o encontro','encontro','o nosso encontro'];
+const NOTES = ['♪','♫','♩','🎵','🎶'];
+const CORES = ['#D4537E','#7F77DD','#1D9E75','#EF9F27','#534AB7'];
+let tentativas = 0;
+
+function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim(); }
+
+function show(id){
+  ['tela-intro','fase1-card','fase2-card','tela-final'].forEach(i=>{
+    document.getElementById(i).style.display = i===id ? 'flex' : 'none';
+  });
+}
+
+function irFase1(){
+  show('fase1-card');
+  document.getElementById('dots').style.display='flex';
+  document.getElementById('d0').classList.add('on');
+}
+
+function resp(btn, ok){
+  const all = document.querySelectorAll('.f1b');
+  all.forEach(b=>{ b.onclick=null; b.setAttribute('data-off','1'); });
+  if(ok){
+    btn.classList.add('right');
+    document.getElementById('f1-fb').textContent = 'exato. de você. 🥹';
+    setTimeout(()=>{ document.getElementById('f1-next').style.display='inline-block'; }, 600);
+  } else {
+    btn.classList.add('wrong');
+    document.getElementById('f1-fb').textContent = 'quase... mas a resposta certa é outra 😉';
+    setTimeout(()=>{
+      all[3].classList.add('right');
+      document.getElementById('f1-fb').textContent = 'de você. era só isso. 🥹';
+      setTimeout(()=>{ document.getElementById('f1-next').style.display='inline-block'; }, 600);
+    }, 1000);
+  }
+}
+
+function irFase2(){
+  show('fase2-card');
+  document.getElementById('d1').classList.add('on');
+  setTimeout(()=>document.getElementById('f2-input').focus(), 100);
+}
+
+function checar(){
+  const inp = document.getElementById('f2-input');
+  const val = norm(inp.value);
+  const fb = document.getElementById('f2-fb');
+  if(!val) return;
+  if(ACEITAS.includes(val)){
+    fb.textContent = 'isso mesmo. 🥹 eu também.';
+    fb.className = '';
+    inp.disabled = true;
+    document.getElementById('f2-btn').disabled = true;
+    setTimeout(()=>{ document.getElementById('f2-next').style.display='inline-block'; }, 700);
+  } else {
+    tentativas++;
+    inp.value = '';
+    if(tentativas===1){ fb.textContent='hmm... pensa melhor 😏'; fb.className='err'; }
+    else if(tentativas===2){ fb.textContent='dica: é algo que envolve nós dois 💭'; fb.className='err'; }
+    else {
+      fb.textContent='a resposta é: nosso encontro 🥹'; fb.className='';
+      inp.value='nosso encontro'; inp.disabled=true;
+      document.getElementById('f2-btn').disabled=true;
+      setTimeout(()=>{ document.getElementById('f2-next').style.display='inline-block'; }, 800);
+    }
+  }
+}
+
+function irFinal(){
+  show('tela-final');
+  document.getElementById('d2').classList.add('on');
+  const armL = document.getElementById('arm-l');
+  const armR = document.getElementById('arm-r');
+  let t = 0;
+  setInterval(()=>{
+    t += 0.08;
+    const dy = Math.sin(t)*5;
+    armL.setAttribute('y', 99+dy);
+    armR.setAttribute('y', 99-dy);
+  }, 40);
+  setInterval(()=>{
+    const wrap = document.getElementById('svg-wrap');
+    const el = document.createElement('div');
+    el.className = 'fnote';
+    el.textContent = NOTES[Math.floor(Math.random()*NOTES.length)];
+    el.style.left = (20+Math.random()*50)+'px';
+    el.style.top = '60px';
+    el.style.color = CORES[Math.floor(Math.random()*CORES.length)];
+    wrap.appendChild(el);
+    setTimeout(()=>el.remove(), 2400);
+  }, 500);
+}
+</script>
