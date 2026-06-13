@@ -4,12 +4,13 @@ body { font-family: var(--font-sans); }
 
 #wrap { width: 100%; padding: 0.75rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
 
-.tela { width: 100%; border-radius: 16px; padding: 1.5rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+.tela { width: 100%; border-radius: 16px; padding: 1.5rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; overflow: hidden; transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.4s ease, margin 0.4s ease; }
+.tela.oculta { max-height: 0 !important; opacity: 0; padding-top: 0; padding-bottom: 0; pointer-events: none; }
 
-#tela-intro { background: #FBEAF0; border: 0.5px solid #F4C0D1; }
-#fase1-card  { background: #EEEDFE; border: 0.5px solid #CECBF6; display: none; }
-#fase2-card  { background: #E1F5EE; border: 0.5px solid #9FE1CB; display: none; }
-#tela-final  { background: #FBEAF0; border: 0.5px solid #F4C0D1; display: none; }
+#tela-intro { background: #FBEAF0; border: 0.5px solid #F4C0D1; max-height: 600px; }
+#fase1-card  { background: #EEEDFE; border: 0.5px solid #CECBF6; max-height: 0; opacity: 0; }
+#fase2-card  { background: #E1F5EE; border: 0.5px solid #9FE1CB; max-height: 0; opacity: 0; }
+#tela-final  { background: #FBEAF0; border: 0.5px solid #F4C0D1; max-height: 0; opacity: 0; }
 
 .tag { font-size: 11px; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
 .tag-pink   { color: #993556; }
@@ -17,16 +18,17 @@ body { font-family: var(--font-sans); }
 .tag-teal   { color: #0F6E56; }
 
 .titulo { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
-.subtitulo { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; max-width: 100%; white-space: pre-line; }
+.subtitulo { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; width: 100%; }
 
-#dots { display: flex; gap: 7px; }
+#dots { display: none; gap: 7px; }
+#dots.visivel { display: flex; }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: #F4C0D1; transition: background 0.4s; }
 .dot.on { background: #D4537E; }
 
 .btn-pink { background: #D4537E; border: none; border-radius: 10px; padding: 13px 28px; font-size: 15px; color: #fff; cursor: pointer; font-family: var(--font-sans); min-height: 44px; width: 100%; }
 .btn-pink:hover { background: #993556; }
 .btn-outline { background: transparent; border: 1.5px solid #D4537E; border-radius: 10px; padding: 12px 28px; font-size: 14px; color: #D4537E; cursor: pointer; font-family: var(--font-sans); min-height: 44px; width: 100%; }
-.btn-outline:hover { background: #FBEAF0; }
+.btn-outline-teal { background: transparent; border: 1.5px solid #1D9E75; border-radius: 10px; padding: 12px 28px; font-size: 14px; color: #1D9E75; cursor: pointer; font-family: var(--font-sans); min-height: 44px; width: 100%; }
 
 .frase { font-size: 20px; font-weight: 500; color: #3C3489; }
 #f1-opts { display: flex; flex-direction: column; gap: 8px; width: 100%; }
@@ -39,13 +41,11 @@ body { font-family: var(--font-sans); }
 #f2-question { font-size: 15px; font-weight: 500; color: #085041; width: 100%; line-height: 1.6; }
 #f2-hint { font-size: 12px; color: #0F6E56; font-style: italic; }
 #f2-row { display: flex; gap: 8px; width: 100%; }
-#f2-input { flex: 1; border: 1px solid #9FE1CB; border-radius: 10px; padding: 12px 14px; font-size: 15px; font-family: var(--font-sans); color: #085041; background: #fff; outline: none; min-height: 44px; }
+#f2-input { flex: 1; border: 1px solid #9FE1CB; border-radius: 10px; padding: 12px 14px; font-size: 16px; font-family: var(--font-sans); color: #085041; background: #fff; outline: none; min-height: 44px; }
 #f2-input:focus { border-color: #1D9E75; }
 #f2-btn { background: #1D9E75; border: none; border-radius: 10px; padding: 12px 18px; font-size: 16px; color: #fff; cursor: pointer; font-family: var(--font-sans); min-height: 44px; min-width: 44px; }
-#f2-btn:hover { background: #0F6E56; }
 #f2-fb { font-size: 13px; min-height: 18px; color: #0F6E56; }
 #f2-fb.err { color: #791F1F; }
-.btn-outline-teal { background: transparent; border: 1.5px solid #1D9E75; border-radius: 10px; padding: 12px 28px; font-size: 14px; color: #1D9E75; cursor: pointer; font-family: var(--font-sans); min-height: 44px; width: 100%; }
 
 #final-header { width: 100%; background: #fff; border: 0.5px solid #F4C0D1; border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 #final-nome { font-size: 22px; font-weight: 500; color: #72243E; }
@@ -59,10 +59,12 @@ body { font-family: var(--font-sans); }
 
 #spotify-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #1DB954; border: none; border-radius: 10px; padding: 14px 22px; font-size: 15px; color: #fff; cursor: pointer; text-decoration: none; font-family: var(--font-sans); width: 100%; min-height: 48px; }
 #spotify-btn:hover { background: #17a349; }
+
+.hidden-btn { display: none; }
 </style>
 
 <div id="wrap">
-  <div id="dots" style="display:none">
+  <div id="dots">
     <div class="dot" id="d0"></div>
     <div class="dot" id="d1"></div>
     <div class="dot" id="d2"></div>
@@ -76,7 +78,7 @@ body { font-family: var(--font-sans); }
     <button class="btn-pink" onclick="irFase1()">vamos lá ✨</button>
   </div>
 
-  <div id="fase1-card" class="tela">
+  <div id="fase1-card" class="tela oculta">
     <div class="tag tag-purple">fase 1</div>
     <div class="frase">sou fã do(a)...</div>
     <div id="f1-opts">
@@ -86,10 +88,10 @@ body { font-family: var(--font-sans); }
       <button class="f1b" onclick="resp(this,true)">de você</button>
     </div>
     <div id="f1-fb"></div>
-    <button id="f1-next" class="btn-outline" style="display:none" onclick="irFase2()">próxima fase →</button>
+    <button id="f1-next" class="btn-outline hidden-btn" onclick="irFase2()">próxima fase →</button>
   </div>
 
-  <div id="fase2-card" class="tela">
+  <div id="fase2-card" class="tela oculta">
     <div class="tag tag-teal">fase 2 — pergunta secreta</div>
     <div id="f2-question">o que é a coisa mais aguardada do ano?</div>
     <div id="f2-hint">dica: não é filme, não é viagem...</div>
@@ -98,10 +100,10 @@ body { font-family: var(--font-sans); }
       <button id="f2-btn" onclick="checar()">→</button>
     </div>
     <div id="f2-fb"></div>
-    <button id="f2-next" class="btn-outline-teal" style="display:none" onclick="irFinal()">ver a surpresa 💌</button>
+    <button id="f2-next" class="btn-outline-teal hidden-btn" onclick="irFinal()">ver a surpresa 💌</button>
   </div>
 
-  <div id="tela-final" class="tela">
+  <div id="tela-final" class="tela oculta">
     <div id="final-header">
       <div class="tag tag-pink">meu cantor preferido</div>
       <div id="final-nome">Bruno 🎸</div>
@@ -155,22 +157,29 @@ body { font-family: var(--font-sans); }
 </div>
 
 <script>
-const ACEITAS = ['nosso beijo','o beijo', 'beijo', 'beijos'];
+const ACEITAS = ['nosso beijo','o beijo','beijo','beijos'];
 const NOTES = ['♪','♫','♩','🎵','🎶'];
 const CORES = ['#D4537E','#7F77DD','#1D9E75','#EF9F27','#534AB7'];
 let tentativas = 0;
 
 function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim(); }
 
-function show(id){
-  ['tela-intro','fase1-card','fase2-card','tela-final'].forEach(i=>{
-    document.getElementById(i).style.display = i===id ? 'flex' : 'none';
-  });
+function mostrar(id, maxH){
+  const el = document.getElementById(id);
+  el.style.maxHeight = maxH;
+  el.style.opacity = '1';
+  el.classList.remove('oculta');
+}
+
+function ocultar(id){
+  const el = document.getElementById(id);
+  el.classList.add('oculta');
 }
 
 function irFase1(){
-  show('fase1-card');
-  document.getElementById('dots').style.display='flex';
+  ocultar('tela-intro');
+  mostrar('fase1-card','700px');
+  document.getElementById('dots').classList.add('visivel');
   document.getElementById('d0').classList.add('on');
 }
 
@@ -180,22 +189,23 @@ function resp(btn, ok){
   if(ok){
     btn.classList.add('right');
     document.getElementById('f1-fb').textContent = 'exato. de você. 🥹';
-    setTimeout(()=>{ document.getElementById('f1-next').style.display='block'; }, 600);
+    setTimeout(()=>{ document.getElementById('f1-next').classList.remove('hidden-btn'); }, 600);
   } else {
     btn.classList.add('wrong');
     document.getElementById('f1-fb').textContent = 'quase... mas a resposta certa é outra 😉';
     setTimeout(()=>{
       all[3].classList.add('right');
       document.getElementById('f1-fb').textContent = 'de você. era só isso. 🥹';
-      setTimeout(()=>{ document.getElementById('f1-next').style.display='block'; }, 600);
+      setTimeout(()=>{ document.getElementById('f1-next').classList.remove('hidden-btn'); }, 600);
     }, 1000);
   }
 }
 
 function irFase2(){
-  show('fase2-card');
+  ocultar('fase1-card');
+  mostrar('fase2-card','600px');
   document.getElementById('d1').classList.add('on');
-  setTimeout(()=>document.getElementById('f2-input').focus(), 100);
+  setTimeout(()=>document.getElementById('f2-input').focus(), 500);
 }
 
 function checar(){
@@ -208,7 +218,7 @@ function checar(){
     fb.className = '';
     inp.disabled = true;
     document.getElementById('f2-btn').disabled = true;
-    setTimeout(()=>{ document.getElementById('f2-next').style.display='block'; }, 700);
+    setTimeout(()=>{ document.getElementById('f2-next').classList.remove('hidden-btn'); }, 700);
   } else {
     tentativas++;
     inp.value = '';
@@ -218,13 +228,14 @@ function checar(){
       fb.textContent='a resposta é: nosso beijo 🥹'; fb.className='';
       inp.value='nosso beijo'; inp.disabled=true;
       document.getElementById('f2-btn').disabled=true;
-      setTimeout(()=>{ document.getElementById('f2-next').style.display='block'; }, 800);
+      setTimeout(()=>{ document.getElementById('f2-next').classList.remove('hidden-btn'); }, 800);
     }
   }
 }
 
 function irFinal(){
-  show('tela-final');
+  ocultar('fase2-card');
+  mostrar('tela-final','900px');
   document.getElementById('d2').classList.add('on');
   const armL = document.getElementById('arm-l');
   const armR = document.getElementById('arm-r');
