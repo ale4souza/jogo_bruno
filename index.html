@@ -1,11 +1,10 @@
-
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font-sans); }
 
-#wrap { max-width: 480px; margin: 0 auto; padding: 1rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+#wrap { width: 100%; padding: 0.75rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
 
-.tela { width: 100%; border-radius: 16px; padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; text-align: center; }
+.tela { width: 100%; border-radius: 16px; padding: 1.5rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
 
 #tela-intro { background: #FBEAF0; border: 0.5px solid #F4C0D1; }
 #fase1-card  { background: #EEEDFE; border: 0.5px solid #CECBF6; display: none; }
@@ -17,52 +16,48 @@ body { font-family: var(--font-sans); }
 .tag-purple { color: #534AB7; }
 .tag-teal   { color: #0F6E56; }
 
-.titulo { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
-.subtitulo { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; max-width: 300px; white-space: pre-line; }
+.titulo { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+.subtitulo { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; max-width: 100%; white-space: pre-line; }
 
-/* dots */
 #dots { display: flex; gap: 7px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: #F4C0D1; transition: background 0.4s; }
 .dot.on { background: #D4537E; }
 
-/* botao primario */
-.btn-pink { background: #D4537E; border: none; border-radius: 10px; padding: 11px 28px; font-size: 14px; color: #fff; cursor: pointer; font-family: var(--font-sans); }
+.btn-pink { background: #D4537E; border: none; border-radius: 10px; padding: 13px 28px; font-size: 15px; color: #fff; cursor: pointer; font-family: var(--font-sans); min-height: 44px; width: 100%; }
 .btn-pink:hover { background: #993556; }
-.btn-outline { background: transparent; border: 1.5px solid #D4537E; border-radius: 10px; padding: 10px 28px; font-size: 14px; color: #D4537E; cursor: pointer; font-family: var(--font-sans); }
+.btn-outline { background: transparent; border: 1.5px solid #D4537E; border-radius: 10px; padding: 12px 28px; font-size: 14px; color: #D4537E; cursor: pointer; font-family: var(--font-sans); min-height: 44px; width: 100%; }
 .btn-outline:hover { background: #FBEAF0; }
 
-/* fase 1 */
 .frase { font-size: 20px; font-weight: 500; color: #3C3489; }
-#f1-opts { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 300px; }
-.f1b { background: #fff; border: 1px solid #CECBF6; border-radius: 10px; padding: 11px 16px; font-size: 14px; color: #3C3489; cursor: pointer; font-family: var(--font-sans); transition: all 0.15s; }
+#f1-opts { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.f1b { background: #fff; border: 1px solid #CECBF6; border-radius: 10px; padding: 13px 16px; font-size: 15px; color: #3C3489; cursor: pointer; font-family: var(--font-sans); transition: all 0.15s; min-height: 44px; width: 100%; }
 .f1b:hover:not([data-off]) { background: #EEEDFE; }
 .f1b.wrong { background: #FCEBEB; border-color: #F09595; color: #791F1F; cursor: default; }
 .f1b.right { background: #E1F5EE; border-color: #5DCAA5; color: #085041; cursor: default; }
 #f1-fb { font-size: 13px; color: #534AB7; min-height: 18px; }
 
-/* fase 2 */
-#f2-question { font-size: 16px; font-weight: 500; color: #085041; max-width: 280px; line-height: 1.6; }
+#f2-question { font-size: 15px; font-weight: 500; color: #085041; width: 100%; line-height: 1.6; }
 #f2-hint { font-size: 12px; color: #0F6E56; font-style: italic; }
-#f2-row { display: flex; gap: 8px; width: 100%; max-width: 300px; }
-#f2-input { flex: 1; border: 1px solid #9FE1CB; border-radius: 10px; padding: 10px 14px; font-size: 14px; font-family: var(--font-sans); color: #085041; background: #fff; outline: none; }
+#f2-row { display: flex; gap: 8px; width: 100%; }
+#f2-input { flex: 1; border: 1px solid #9FE1CB; border-radius: 10px; padding: 12px 14px; font-size: 15px; font-family: var(--font-sans); color: #085041; background: #fff; outline: none; min-height: 44px; }
 #f2-input:focus { border-color: #1D9E75; }
-#f2-btn { background: #1D9E75; border: none; border-radius: 10px; padding: 10px 16px; font-size: 14px; color: #fff; cursor: pointer; font-family: var(--font-sans); }
+#f2-btn { background: #1D9E75; border: none; border-radius: 10px; padding: 12px 18px; font-size: 16px; color: #fff; cursor: pointer; font-family: var(--font-sans); min-height: 44px; min-width: 44px; }
 #f2-btn:hover { background: #0F6E56; }
 #f2-fb { font-size: 13px; min-height: 18px; color: #0F6E56; }
 #f2-fb.err { color: #791F1F; }
+.btn-outline-teal { background: transparent; border: 1.5px solid #1D9E75; border-radius: 10px; padding: 12px 28px; font-size: 14px; color: #1D9E75; cursor: pointer; font-family: var(--font-sans); min-height: 44px; width: 100%; }
 
-/* final */
 #final-header { width: 100%; background: #fff; border: 0.5px solid #F4C0D1; border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 #final-nome { font-size: 22px; font-weight: 500; color: #72243E; }
-#final-sub { font-size: 13px; color: #993556; max-width: 280px; line-height: 1.6; }
+#final-sub { font-size: 13px; color: #993556; width: 100%; line-height: 1.6; }
 
-#svg-wrap { position: relative; width: 180px; height: 210px; }
+#svg-wrap { position: relative; width: 160px; height: 190px; }
 .fnote { position: absolute; font-size: 18px; animation: fn 2.4s ease-in forwards; opacity: 0; pointer-events: none; }
 @keyframes fn { 0%{opacity:0;transform:translateY(0) scale(.7)} 15%{opacity:1;transform:translateY(-14px) scale(1)} 75%{opacity:.8;transform:translateY(-80px)} 100%{opacity:0;transform:translateY(-110px) scale(.8)} }
 
-#final-txt { font-size: 14px; color: #72243E; max-width: 270px; line-height: 1.7; }
+#final-txt { font-size: 14px; color: #72243E; width: 100%; line-height: 1.7; }
 
-#spotify-btn { display: flex; align-items: center; gap: 10px; background: #1DB954; border: none; border-radius: 10px; padding: 12px 22px; font-size: 14px; color: #fff; cursor: pointer; text-decoration: none; font-family: var(--font-sans); }
+#spotify-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #1DB954; border: none; border-radius: 10px; padding: 14px 22px; font-size: 15px; color: #fff; cursor: pointer; text-decoration: none; font-family: var(--font-sans); width: 100%; min-height: 48px; }
 #spotify-btn:hover { background: #17a349; }
 </style>
 
@@ -73,7 +68,6 @@ body { font-family: var(--font-sans); }
     <div class="dot" id="d2"></div>
   </div>
 
-  <!-- INTRO -->
   <div id="tela-intro" class="tela">
     <div style="font-size:44px">🌙</div>
     <div class="tag tag-pink">um joguinho pra você</div>
@@ -82,7 +76,6 @@ body { font-family: var(--font-sans); }
     <button class="btn-pink" onclick="irFase1()">vamos lá ✨</button>
   </div>
 
-  <!-- FASE 1 -->
   <div id="fase1-card" class="tela">
     <div class="tag tag-purple">fase 1</div>
     <div class="frase">sou fã do(a)...</div>
@@ -96,7 +89,6 @@ body { font-family: var(--font-sans); }
     <button id="f1-next" class="btn-outline" style="display:none" onclick="irFase2()">próxima fase →</button>
   </div>
 
-  <!-- FASE 2 -->
   <div id="fase2-card" class="tela">
     <div class="tag tag-teal">fase 2 — pergunta secreta</div>
     <div id="f2-question">o que é a coisa mais aguardada do ano?</div>
@@ -106,10 +98,9 @@ body { font-family: var(--font-sans); }
       <button id="f2-btn" onclick="checar()">→</button>
     </div>
     <div id="f2-fb"></div>
-    <button id="f2-next" class="btn-outline" style="display:none;border-color:#1D9E75;color:#1D9E75" onclick="irFinal()">ver a surpresa 💌</button>
+    <button id="f2-next" class="btn-outline-teal" style="display:none" onclick="irFinal()">ver a surpresa 💌</button>
   </div>
 
-  <!-- FINAL -->
   <div id="tela-final" class="tela">
     <div id="final-header">
       <div class="tag tag-pink">meu cantor preferido</div>
@@ -117,7 +108,7 @@ body { font-family: var(--font-sans); }
       <div id="final-sub">sua voz tem um jeito especial de deixar qualquer momento mais bonito.</div>
     </div>
     <div id="svg-wrap">
-      <svg width="180" height="210" viewBox="0 0 180 210" xmlns="http://www.w3.org/2000/svg">
+      <svg width="160" height="190" viewBox="0 0 180 210" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="90" cy="188" rx="30" ry="8" fill="#F4C0D1" opacity="0.5"/>
         <rect x="76" y="143" width="13" height="36" rx="6" fill="#7F77DD"/>
         <rect x="91" y="143" width="13" height="36" rx="6" fill="#7F77DD"/>
@@ -189,14 +180,14 @@ function resp(btn, ok){
   if(ok){
     btn.classList.add('right');
     document.getElementById('f1-fb').textContent = 'exato. de você. 🥹';
-    setTimeout(()=>{ document.getElementById('f1-next').style.display='inline-block'; }, 600);
+    setTimeout(()=>{ document.getElementById('f1-next').style.display='block'; }, 600);
   } else {
     btn.classList.add('wrong');
     document.getElementById('f1-fb').textContent = 'quase... mas a resposta certa é outra 😉';
     setTimeout(()=>{
       all[3].classList.add('right');
       document.getElementById('f1-fb').textContent = 'de você. era só isso. 🥹';
-      setTimeout(()=>{ document.getElementById('f1-next').style.display='inline-block'; }, 600);
+      setTimeout(()=>{ document.getElementById('f1-next').style.display='block'; }, 600);
     }, 1000);
   }
 }
@@ -217,7 +208,7 @@ function checar(){
     fb.className = '';
     inp.disabled = true;
     document.getElementById('f2-btn').disabled = true;
-    setTimeout(()=>{ document.getElementById('f2-next').style.display='inline-block'; }, 700);
+    setTimeout(()=>{ document.getElementById('f2-next').style.display='block'; }, 700);
   } else {
     tentativas++;
     inp.value = '';
@@ -225,9 +216,9 @@ function checar(){
     else if(tentativas===2){ fb.textContent='dica: é algo que envolve nós dois 💭'; fb.className='err'; }
     else {
       fb.textContent='a resposta é: nosso beijo 🥹'; fb.className='';
-      inp.value='nosso encontro'; inp.disabled=true;
+      inp.value='nosso beijo'; inp.disabled=true;
       document.getElementById('f2-btn').disabled=true;
-      setTimeout(()=>{ document.getElementById('f2-next').style.display='inline-block'; }, 800);
+      setTimeout(()=>{ document.getElementById('f2-next').style.display='block'; }, 800);
     }
   }
 }
